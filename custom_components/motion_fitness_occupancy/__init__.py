@@ -1,7 +1,7 @@
-"""Custom integration to integrate integration_blueprint with Home Assistant.
+"""Custom integration to integrate motion_fitness_occupancy with Home Assistant.
 
 For more details about this integration, please refer to
-https://github.com/ludeeus/integration_blueprint
+https://github.com/ludeeus/motion_fitness_occupancy
 """
 from __future__ import annotations
 
