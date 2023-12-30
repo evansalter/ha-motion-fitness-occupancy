@@ -8,7 +8,7 @@ from .const import ATTRIBUTION, DOMAIN, NAME, VERSION
 from .coordinator import MotionFitnessOccupancyDataUpdateCoordinator
 
 
-class IntegrationBlueprintEntity(CoordinatorEntity):
+class MotionFitnessOccurpancyEntity(CoordinatorEntity):
     """BlueprintEntity class."""
 
     _attr_attribution = ATTRIBUTION

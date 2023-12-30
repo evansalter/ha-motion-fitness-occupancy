@@ -5,7 +5,7 @@ from homeassistant.components.sensor import SensorEntity, SensorEntityDescriptio
 
 from .const import DOMAIN
 from .coordinator import MotionFitnessOccupancyDataUpdateCoordinator
-from .entity import IntegrationBlueprintEntity
+from .entity import MotionFitnessOccurpancyEntity
 
 ENTITY_DESCRIPTIONS = (
     SensorEntityDescription(
@@ -28,7 +28,7 @@ async def async_setup_entry(hass, entry, async_add_devices):
     )
 
 
-class IntegrationBlueprintSensor(IntegrationBlueprintEntity, SensorEntity):
+class IntegrationBlueprintSensor(MotionFitnessOccurpancyEntity, SensorEntity):
     """motion_fitness_occupancy Sensor class."""
 
     def __init__(

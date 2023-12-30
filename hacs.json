@@ -1,5 +1,5 @@
 {
-    "name": "Integration blueprint",
+    "name": "Motion Fitness Occupancy",
     "filename": "motion_fitness_occupancy.zip",
     "hide_default_branch": true,
     "homeassistant": "2023.8.0",

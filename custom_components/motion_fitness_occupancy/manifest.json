@@ -1,6 +1,6 @@
 {
   "domain": "motion_fitness_occupancy",
-  "name": "Integration blueprint",
+  "name": "Motion Fitness Occupancy",
   "codeowners": [
     "@ludeeus"
   ],
