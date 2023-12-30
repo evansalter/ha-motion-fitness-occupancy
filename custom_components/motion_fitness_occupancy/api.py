@@ -30,7 +30,7 @@ class MotionFitnessOccupancyApiClient:
     """Sample API Client."""
 
     URL_FORMAT = u"https://www.inchargelife.com/App/CheckInCounter.aspx?MasterID=16853&LocationID={location_id}"
-    REGEX = r'<div class="progressbar-text".*>(\d+)<\/div>'
+    REGEX = r'<input name="txtHiddenCurrentValue" type="text" value="(\d+)" id="txtHiddenCurrentValue" style="display:none;" \/>'
 
     def __init__(
         self,
@@ -38,13 +38,15 @@ class MotionFitnessOccupancyApiClient:
     ) -> None:
         """Sample API Client."""
         self._session = session
-    
+
     async def async_get_occupancy_for_location(self, location_id) -> int:
         """Fetch and parse the occupancy for a given location"""
         response = await self._api_wrapper(
             method="get",
             url=self.URL_FORMAT.format(location_id=location_id)
         )
+        print("Got resonse")
+        print(response)
         matched = re.search(self.REGEX, response)
         num_str = matched.group(1)
         return int(num_str) if num_str else 0
@@ -70,7 +72,7 @@ class MotionFitnessOccupancyApiClient:
                         "Invalid credentials",
                     )
                 response.raise_for_status()
-                return await response.json()
+                return await response.text()
 
         except asyncio.TimeoutError as exception:
             raise IntegrationBlueprintApiClientCommunicationError(

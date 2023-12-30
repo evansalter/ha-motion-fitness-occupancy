@@ -5,7 +5,12 @@ from homeassistant.components.sensor import SensorEntity, SensorEntityDescriptio
 
 from .const import DOMAIN
 from .coordinator import MotionFitnessOccupancyDataUpdateCoordinator
-from .entity import MotionFitnessOccurpancyEntity
+from .entity import MotionFitnessOccupancyEntity
+from .api import MotionFitnessOccupancyApiClient
+
+from datetime import timedelta
+
+SCAN_INTERVAL = timedelta(minutes=5)
 
 ICON = "mdi:account"
 
@@ -19,7 +24,8 @@ LOCATIONS = [
 ENTITY_DESCRIPTIONS = (
     SensorEntityDescription(
         key=f"motion_fitness_occupancy_{location['location_id']}",
-        name=f"{location['name']} Motion Fitness Occupancy",
+        name=location['name'],
+        has_entity_name=True,
         icon=ICON,
     ) for location in LOCATIONS
 )
@@ -27,29 +33,29 @@ ENTITY_DESCRIPTIONS = (
 
 async def async_setup_entry(hass, entry, async_add_devices):
     """Set up the sensor platform."""
-    coordinator = hass.data[DOMAIN][entry.entry_id]
     async_add_devices(
-        IntegrationBlueprintSensor(
-            coordinator=coordinator,
+        MotionFitnessOccupancyEntity(
             entity_description=entity_description,
+            client=hass.data[DOMAIN][entry.entry_id]
         )
         for entity_description in ENTITY_DESCRIPTIONS
     )
 
 
-class IntegrationBlueprintSensor(MotionFitnessOccurpancyEntity, SensorEntity):
-    """motion_fitness_occupancy Sensor class."""
+# class IntegrationBlueprintSensor(MotionFitnessOccupancyEntity):
+#     """motion_fitness_occupancy Sensor class."""
 
-    def __init__(
-        self,
-        coordinator: MotionFitnessOccupancyDataUpdateCoordinator,
-        entity_description: SensorEntityDescription,
-    ) -> None:
-        """Initialize the sensor class."""
-        super().__init__(coordinator)
-        self.entity_description = entity_description
+#     def __init__(
+#         self,
+#         entity_description: SensorEntityDescription,
+#         client: MotionFitnessOccupancyApiClient
+#     ) -> None:
+#         """Initialize the sensor class."""
+#         super().__init__(client)
+#         self.entity_description = entity_description
 
-    @property
-    def native_value(self) -> str:
-        """Return the native value of the sensor."""
-        return self.coordinator.data
+#     @property
+#     def native_value(self) -> int:
+#         """Return the native value of the sensor."""
+#         # return self.coordinator.data
+#         return 10
