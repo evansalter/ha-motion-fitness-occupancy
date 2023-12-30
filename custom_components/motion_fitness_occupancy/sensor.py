@@ -7,12 +7,21 @@ from .const import DOMAIN
 from .coordinator import MotionFitnessOccupancyDataUpdateCoordinator
 from .entity import MotionFitnessOccurpancyEntity
 
+ICON = "mdi:account"
+
+LOCATIONS = [
+    { 'location_id': 3457, 'name': 'Brighton' },
+    { 'location_id': 3460, 'name': 'Lawson Heights' },
+    { 'location_id': 3458, 'name': 'Stonebridge' },
+    { 'location_id': 3459, 'name': 'Blairmore' },
+]
+
 ENTITY_DESCRIPTIONS = (
     SensorEntityDescription(
-        key="motion_fitness_occupancy",
-        name="Integration Sensor",
-        icon="mdi:format-quote-close",
-    ),
+        key=f"motion_fitness_occupancy_{location['location_id']}",
+        name=f"{location['name']} Motion Fitness Occupancy",
+        icon=ICON,
+    ) for location in LOCATIONS
 )
 
 
@@ -43,4 +52,4 @@ class IntegrationBlueprintSensor(MotionFitnessOccurpancyEntity, SensorEntity):
     @property
     def native_value(self) -> str:
         """Return the native value of the sensor."""
-        return self.coordinator.data.get("body")
+        return self.coordinator.data

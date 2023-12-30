@@ -6,7 +6,7 @@ https://github.com/ludeeus/motion_fitness_occupancy
 from __future__ import annotations
 
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_PASSWORD, CONF_USERNAME, Platform
+from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
@@ -26,8 +26,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     hass.data[DOMAIN][entry.entry_id] = coordinator = MotionFitnessOccupancyDataUpdateCoordinator(
         hass=hass,
         client=MotionFitnessOccupancyApiClient(
-            username=entry.data[CONF_USERNAME],
-            password=entry.data[CONF_PASSWORD],
             session=async_get_clientsession(hass),
         ),
     )

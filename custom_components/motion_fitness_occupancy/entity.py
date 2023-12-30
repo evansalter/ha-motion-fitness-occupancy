@@ -4,11 +4,11 @@ from __future__ import annotations
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import ATTRIBUTION, DOMAIN, NAME, VERSION
+from .const import ATTRIBUTION, DOMAIN, NAME
 from .coordinator import MotionFitnessOccupancyDataUpdateCoordinator
 
 
-class MotionFitnessOccurpancyEntity(CoordinatorEntity):
+class MotionFitnessOccupancyEntity(CoordinatorEntity):
     """BlueprintEntity class."""
 
     _attr_attribution = ATTRIBUTION
@@ -20,6 +20,4 @@ class MotionFitnessOccurpancyEntity(CoordinatorEntity):
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, self.unique_id)},
             name=NAME,
-            model=VERSION,
-            manufacturer=NAME,
         )

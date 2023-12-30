@@ -7,6 +7,8 @@ import socket
 import aiohttp
 import async_timeout
 
+import re
+
 
 class IntegrationBlueprintApiClientError(Exception):
     """Exception to indicate a general API error."""
@@ -27,27 +29,25 @@ class IntegrationBlueprintApiClientAuthenticationError(
 class MotionFitnessOccupancyApiClient:
     """Sample API Client."""
 
+    URL_FORMAT = u"https://www.inchargelife.com/App/CheckInCounter.aspx?MasterID=16853&LocationID={location_id}"
+    REGEX = r'<div class="progressbar-text".*>(\d+)<\/div>'
+
     def __init__(
         self,
         session: aiohttp.ClientSession,
     ) -> None:
         """Sample API Client."""
         self._session = session
-
-    async def async_get_data(self) -> any:
-        """Get data from the API."""
-        return await self._api_wrapper(
-            method="get", url="https://jsonplaceholder.typicode.com/posts/1"
+    
+    async def async_get_occupancy_for_location(self, location_id) -> int:
+        """Fetch and parse the occupancy for a given location"""
+        response = await self._api_wrapper(
+            method="get",
+            url=self.URL_FORMAT.format(location_id=location_id)
         )
-
-    async def async_set_title(self, value: str) -> any:
-        """Get data from the API."""
-        return await self._api_wrapper(
-            method="patch",
-            url="https://jsonplaceholder.typicode.com/posts/1",
-            data={"title": value},
-            headers={"Content-type": "application/json; charset=UTF-8"},
-        )
+        matched = re.search(self.REGEX, response)
+        num_str = matched.group(1)
+        return int(num_str) if num_str else 0
 
     async def _api_wrapper(
         self,
