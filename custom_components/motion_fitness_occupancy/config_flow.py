@@ -29,10 +29,7 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         _errors = {}
         if user_input is not None:
             try:
-                await self._test_credentials(
-                    username=user_input[CONF_USERNAME],
-                    password=user_input[CONF_PASSWORD],
-                )
+                await self._test_credentials()
             except IntegrationBlueprintApiClientAuthenticationError as exception:
                 LOGGER.warning(exception)
                 _errors["base"] = "auth"
@@ -70,11 +67,9 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             errors=_errors,
         )
 
-    async def _test_credentials(self, username: str, password: str) -> None:
+    async def _test_credentials(self) -> None:
         """Validate credentials."""
         client = MotionFitnessOccupancyApiClient(
-            username=username,
-            password=password,
             session=async_create_clientsession(self.hass),
         )
         await client.async_get_data()
