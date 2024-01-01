@@ -16,7 +16,8 @@ class MotionFitnessOccupancyEntity(SensorEntity):
     def __init__(
         self,
         entity_description: SensorEntityDescription,
-        client: MotionFitnessOccupancyApiClient
+        client: MotionFitnessOccupancyApiClient,
+        location_name: str,
     ) -> None:
         """Initialize."""
         super().__init__()
@@ -24,7 +25,7 @@ class MotionFitnessOccupancyEntity(SensorEntity):
         self._attr_unique_id = self.entity_description.key
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, self.unique_id)},
-            name=NAME,
+            name=f"Motion Fitness {location_name}",
         )
         self.client = client
 
