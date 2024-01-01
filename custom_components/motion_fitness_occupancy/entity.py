@@ -33,9 +33,3 @@ class MotionFitnessOccupancyEntity(SensorEntity):
         result = await self.client.async_get_occupancy_for_location(location_id)
         self._attr_native_value = result
         return result
-
-    # @property
-    # def native_value(self) -> int:
-    #     """Return the native value of the sensor."""
-    #     # return self.coordinator.data
-    #     return 10

@@ -1,12 +1,10 @@
 """Sensor platform for motion_fitness_occupancy."""
 from __future__ import annotations
 
-from homeassistant.components.sensor import SensorEntity, SensorEntityDescription
+from homeassistant.components.sensor import SensorEntityDescription
 
 from .const import DOMAIN
-from .coordinator import MotionFitnessOccupancyDataUpdateCoordinator
 from .entity import MotionFitnessOccupancyEntity
-from .api import MotionFitnessOccupancyApiClient
 
 from datetime import timedelta
 
@@ -40,22 +38,3 @@ async def async_setup_entry(hass, entry, async_add_devices):
         )
         for entity_description in ENTITY_DESCRIPTIONS
     )
-
-
-# class IntegrationBlueprintSensor(MotionFitnessOccupancyEntity):
-#     """motion_fitness_occupancy Sensor class."""
-
-#     def __init__(
-#         self,
-#         entity_description: SensorEntityDescription,
-#         client: MotionFitnessOccupancyApiClient
-#     ) -> None:
-#         """Initialize the sensor class."""
-#         super().__init__(client)
-#         self.entity_description = entity_description
-
-#     @property
-#     def native_value(self) -> int:
-#         """Return the native value of the sensor."""
-#         # return self.coordinator.data
-#         return 10
