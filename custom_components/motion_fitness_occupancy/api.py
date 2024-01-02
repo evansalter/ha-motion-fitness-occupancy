@@ -29,7 +29,7 @@ class IntegrationBlueprintApiClientAuthenticationError(
 class MotionFitnessOccupancyApiClient:
     """Sample API Client."""
 
-    URL_FORMAT = u"https://www.inchargelife.com/App/CheckInCounter.aspx?MasterID=16853&LocationID={location_id}"
+    URL_FORMAT = "https://www.inchargelife.com/App/CheckInCounter.aspx?MasterID=16853&LocationID={location_id}"
     REGEX = r'<input name="txtHiddenCurrentValue" type="text" value="(\d+)" id="txtHiddenCurrentValue" style="display:none;" \/>'
 
     def __init__(
@@ -40,7 +40,7 @@ class MotionFitnessOccupancyApiClient:
         self._session = session
 
     async def async_get_occupancy_for_location(self, location_id) -> int:
-        """Fetch and parse the occupancy for a given location"""
+        """Fetch and parse the occupancy for a given location."""
         response = await self._api_wrapper(
             method="get",
             url=self.URL_FORMAT.format(location_id=location_id)
