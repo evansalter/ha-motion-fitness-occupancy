@@ -13,6 +13,9 @@
             "auth": "Username/Password is wrong.",
             "connection": "Unable to connect to the server.",
             "unknown": "Unknown error occurred."
+        },
+        "abort": {
+            "single_instance_allowed": "Motion Fitness Occupancy is already configured. Only one instance is allowed."
         }
     }
 }

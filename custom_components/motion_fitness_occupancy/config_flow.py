@@ -17,6 +17,11 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         user_input: dict | None = None,
     ) -> config_entries.FlowResult:
         """Handle a flow initialized by the user."""
+        # entries = self.hass.config_entries.async_entries()
+        current_entries = self.hass.config_entries.async_entries(self.handler)
+        if current_entries:
+            return self.async_abort(reason="single_instance_allowed")
+
         return self.async_create_entry(
             title=NAME,
             data={},
