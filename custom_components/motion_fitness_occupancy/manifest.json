@@ -2,11 +2,11 @@
   "domain": "motion_fitness_occupancy",
   "name": "Motion Fitness Occupancy",
   "codeowners": [
-    "@ludeeus"
+    "@evansalter"
   ],
   "config_flow": true,
-  "documentation": "https://github.com/ludeeus/motion_fitness_occupancy",
+  "documentation": "https://github.com/evansalter/ha-motion-fitness-occupancy",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/ludeeus/motion_fitness_occupancy/issues",
-  "version": "0.0.0"
+  "issue_tracker": "https://github.com/evansalter/ha-motion-fitness-occupancy/issues",
+  "version": "1.0.0"
 }

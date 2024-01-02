@@ -1,7 +1,7 @@
 """Custom integration to integrate motion_fitness_occupancy with Home Assistant.
 
 For more details about this integration, please refer to
-https://github.com/ludeeus/motion_fitness_occupancy
+https://github.com/evansalter/ha-motion-fitness-occupancy
 """
 from __future__ import annotations
 
