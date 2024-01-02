@@ -45,8 +45,6 @@ class MotionFitnessOccupancyApiClient:
             method="get",
             url=self.URL_FORMAT.format(location_id=location_id)
         )
-        print("Got resonse")
-        print(response)
         matched = re.search(self.REGEX, response)
         num_str = matched.group(1)
         return int(num_str) if num_str else 0

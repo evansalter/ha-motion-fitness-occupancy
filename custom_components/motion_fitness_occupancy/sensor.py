@@ -19,24 +19,22 @@ LOCATIONS = [
     { 'location_id': 3459, 'name': 'Blairmore' },
 ]
 
-ENTITY_DESCRIPTIONS = (
-    [location, SensorEntityDescription(
+def _get_location_description_pairs():
+    return ((location, SensorEntityDescription(
         key=f"motion_fitness_occupancy_{location['location_id']}",
         name='Current Occupancy',
         has_entity_name=True,
         icon=ICON,
-        unit_of_measurement='',
-    )] for location in LOCATIONS
-)
+        native_unit_of_measurement='people',
+    )) for location in LOCATIONS)
 
 
 async def async_setup_entry(hass, entry, async_add_devices):
     """Set up the sensor platform."""
-    async_add_devices(
-        MotionFitnessOccupancyEntity(
-            entity_description=entity_description,
-            client=hass.data[DOMAIN][entry.entry_id],
-            location_name=location['name'],
-        )
-        for [location, entity_description] in ENTITY_DESCRIPTIONS
-    )
+    devices = [MotionFitnessOccupancyEntity(
+        entity_description=entity_description,
+        client=hass.data[DOMAIN][entry.entry_id],
+        location_name=location['name'],
+    ) for (location, entity_description) in _get_location_description_pairs()]
+
+    async_add_devices(devices, update_before_add=True)

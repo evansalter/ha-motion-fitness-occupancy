@@ -33,4 +33,3 @@ class MotionFitnessOccupancyEntity(SensorEntity):
         location_id = self.unique_id.split('_')[-1]
         result = await self.client.async_get_occupancy_for_location(location_id)
         self._attr_native_value = result
-        return result
