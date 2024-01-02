@@ -8,7 +8,7 @@ from .entity import MotionFitnessOccupancyEntity
 
 from datetime import timedelta
 
-SCAN_INTERVAL = timedelta(minutes=5)
+SCAN_INTERVAL = timedelta(minutes=10)
 
 ICON = "mdi:account"
 
