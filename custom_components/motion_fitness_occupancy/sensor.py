@@ -1,7 +1,7 @@
 """Sensor platform for motion_fitness_occupancy."""
 from __future__ import annotations
 
-from homeassistant.components.sensor import SensorEntityDescription
+from homeassistant.components.sensor import SensorEntityDescription, SensorStateClass
 
 from .const import DOMAIN
 from .entity import MotionFitnessOccupancyEntity
@@ -26,6 +26,7 @@ def _get_location_description_pairs():
         has_entity_name=True,
         icon=ICON,
         native_unit_of_measurement='people',
+        state_class=SensorStateClass.MEASUREMENT,
     )) for location in LOCATIONS)
 
 
